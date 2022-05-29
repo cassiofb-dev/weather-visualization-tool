@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule }  from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HomeService } from './routes/home/home.service';
 import { AppRoutingModule } from './app-routing.module';

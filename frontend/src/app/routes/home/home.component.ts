@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit  } from '@angular/core';
 import { latLng, marker, tileLayer, icon } from 'leaflet';
 import * as L from 'leaflet';
 import { HomeService } from './home.service';
