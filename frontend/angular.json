@@ -31,9 +31,24 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/leaflet.fullscreen/Control.FullScreen.css",
+              "node_modules/leaflet-timedimension/dist/leaflet.timedimension.control.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/leaflet/dist/leaflet.js",
+              "node_modules/leaflet.fullscreen/Control.FullScreen.js",
+              "src/assets/js/iso8601.min.js",
+              "node_modules/leaflet.nontiledlayer/dist/NonTiledLayer.js",
+              "node_modules/leaflet-timedimension/dist/leaflet.timedimension.src.js",
+              "src/assets/js/leaflet.timedimension.layer.wms.timeseries.js",
+              "src/assets/js/leaflet.timedimension.circlelabelmarker.js",
+              "node_modules/highcharts/highstock.js"
+            ]
           },
           "configurations": {
             "production": {
