@@ -7,6 +7,8 @@ import { HomeComponent } from './routes/home/home.component';
 import { DocsComponent } from './routes/docs/docs.component';
 import { AboutComponent } from './routes/about/about.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     HomeComponent,
     DocsComponent,
     AboutComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
