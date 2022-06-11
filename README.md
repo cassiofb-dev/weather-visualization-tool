@@ -5,7 +5,8 @@
 <h4 align="center">
   WVTool - Weather Visualization Tool
   <br>
-  [Production](https://weather-visualization-tool.vercel.app) | Development
+  <a href="https://weather-visualization-tool.vercel.app">Production</a> |
+  <a href="https://weather-visualization-tool-git-dev-cassiofb-dev.vercel.app">Development</a>
 </h4>
 
 <p align="center">
