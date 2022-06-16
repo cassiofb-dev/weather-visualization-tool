@@ -1,52 +1,84 @@
-import { Component, OnInit, AfterViewInit  } from '@angular/core';
-import { latLng, marker, tileLayer, icon } from 'leaflet';
-import * as L from 'leaflet';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
+import { HttpClient } from '@angular/common/http';
+//import * as L from 'leaflet';
 
-const iconRetinaUrl = '/frontend/src/assets/images/marker-icon-2x.png';
-const iconUrl = '/frontend/src/assets/images/marker-icon.png';
-const shadowUrl = '/frontend/src/assets/images/marker-shadow.png';
-
-const defaultIcon = L.icon({
-  iconRetinaUrl,
-  iconUrl,
-  shadowUrl,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  tooltipAnchor: [16, -28],
-  shadowSize: [41, 41]
-});
-L.Marker.prototype.options.icon = defaultIcon;
-
+declare var L: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements AfterViewInit {
+  //leafletMap?: L.Map;
+  public map?: any;
+  timeStamps: Array<any> = [];
 
-  public map: any;
 
-  private initMap(): void{
-    this.map = L.map('map', {
-      center: [-22.9025440, -43.4734225],
-      zoom: 11
-    });
-
-    const tiles = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
-    tiles.addTo(this.map)
-  }
-
-  ngOnInit(): void {
-
-  }
-
-  constructor(private markerService: HomeService){
-  }
+  constructor(private mapService: HomeService) { }
 
   ngAfterViewInit(): void {
     this.initMap();
-    this.markerService.makeNeighborhoodsMarkers(this.map)
+  }
+
+
+
+  // https://apps.socib.es/Leaflet.TimeDimension/examples/example13.html
+  // Just an example to configure leaflet with time dimension
+  initMap() {
+    this.timeStamps = this.mapService.makeTimeStamps(this.map);
+    console.log(this.timeStamps);
+    this.map = L.map("map", {
+      zoom: 11,
+      center: [-22.9025440, -43.4734225],
+      timeDimension: true,
+      timeDimensionControl: true,
+      timeDimensionOptions: {
+        times: this.timeStamps,
+        currentTime: this.timeStamps[0],
+        period: "P1M"
+      },
+      timeDimensionControlOptions: {
+        timeSliderDragUpdate: true,
+        autoPlay: true,
+        playerOptions: { transitionTime: 1000, startOver: false }
+      }
+    });
+
+    var backgroundLayer = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png");
+    this.map.addLayer(backgroundLayer);
+
+    this.mapService.makePluviometricStationsMarkers(this.map);
+    this.mapService.makeLightening(this.map);
+
+    const legend = new (L.Control.extend({
+      options: { position: 'bottomright' }
+    }));
+
+    const vm = this;
+    legend.onAdd = function () {
+      const div = L.DomUtil.create('div', 'legend');
+      const labels = [
+        0 + '-' + 10,
+        10 + '-' + 20,
+        20+'-'+50,
+        50+'-'+100,
+        100+"-"+200,
+        200+"-"+500,
+        500+"-"+1000,
+        1000+"+"
+      ];
+
+      const grades = [0, 10, 20, 50, 100, 200, 500, 1000];
+      div.innerHTML = '<div><b>Legend</b></div>';
+      for (let i = 0; i < grades.length; i++) {
+        div.innerHTML += '<i style="background:' + vm.mapService.getColor(grades[ i ]) + '"> &nbsp; &nbsp;</i> &nbsp; &nbsp;'
+        + labels[i] + '<br margin=0 />';
+      }
+      return div;
+    };
+    legend.addTo(this.map);
+
   }
 }
+

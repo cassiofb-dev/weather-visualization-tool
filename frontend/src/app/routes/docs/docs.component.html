@@ -1,1 +1,154 @@
-<img class="mx-auto d-block" src="/assets/under-construction.svg" alt="under-construction" style="max-height: 80vh;">
+<h1 align="center">
+  WVTool
+</h1>
+
+<h4 align="center">
+  WVTool - Weather Visualization Tool
+</h4>
+
+<p align="center">
+  <a href="/docs/#about">About</a> •
+  <a href="/docs/#features">Features</a> •
+  <a href="/docs/#install">Install</a> •
+  <a href="/docs/#workflow">Workflow</a> •
+  <a href="/docs/#architecture-diagram">Architecture Diagram</a> •
+  <a href="/docs/#project-requirements">Project Requirements</a> •
+  <a href="/docs/#credits">Credits</a> •
+  <a href="/docs/#license">License</a>
+</p>
+
+<p align="center"><img src="https://i.imgur.com/K0E5iFC.jpg" alt="cefet"></p>
+<h2 id="about">About</h2>
+<p>WVTool stands for Weather Visualization Tool. WVtool is a project that its main goal
+  is to visualize GOES-16 weather data for Rio de Janeiro region. This project is done
+  by CEFET/RJ CC course students.</p>
+<h2 id="features">Features</h2>
+<ul>
+  <li>Interactive Weather Map<ul>
+      <li>Zoom in</li>
+      <li>Zoom out</li>
+      <li>Translation</li>
+    </ul>
+  </li>
+  <li>Multilayer<ul>
+      <li>Select different map layers</li>
+      <li>Select different weather features layers</li>
+    </ul>
+  </li>
+</ul>
+<h2 id="install">Install</h2>
+<p>For running this project locally you will need to install:</p>
+<ol>
+  <li><a href="https://github.com/git/git">Git</a></li>
+  <li><a href="https://nodejs.org/en/">Node.js</a></li>
+</ol>
+<pre><code class="lang-bash"><span class="hljs-meta"># Clone the repository</span>
+git clone https:<span class="hljs-comment">//github.com/cassiofb-dev/weather-visualization-tool</span>
+
+<span class="hljs-meta"># Go into project directory</span>
+cd weather-visualization-tool
+
+<span class="hljs-meta"># Go into frontend directory</span>
+cd frontend
+
+<span class="hljs-meta"># Install frontend dependencies</span>
+npm i
+
+<span class="hljs-meta"># Start frontend application</span>
+npm start
+</code></pre>
+<h2 id="workflow">Workflow</h2>
+<p>For deploying new code on production enviroment, the WVTool&#39;s team uses <a href="https://vercel.com">Vercel</a>
+  for the frontend. This project uses 3 types of enviroments:</p>
+<ol>
+  <li>Production - Code found in master branch, stable releases.</li>
+  <li>Preview - Code found in dev branch where the new features are gathered. If no bugs are found and the team approve
+    the changes it goes into master then production enviroment.</li>
+  <li>Staging - Code found in each individual feature branch, this helps isolating a feature for testing. In case that
+    no bugs are found, the team can approve this branch to go into dev then the code will be deployed to preview
+    enviroment.</li>
+</ol>
+<p>Below is a image to better visualization of this project workflow.</p>
+<p><img src="https://i.imgur.com/dQhte2C.png" alt="workflow"></p>
+<h2 id="architecture-diagram">Architecture Diagram</h2>
+<p>As this project uses geospatial data, the WSM protocol. The following explanation and image are from the academic
+  paper: Walker, A. &amp; Pham, Binh &amp; Maeder, Anthony. (2004). A bayesian framework for automated dataset retrieval
+  in geographic Information Systems. Proceedings - 10th International Multimedia Modelling Conference, MMM 2004. 138-
+  144. 10.1109/MULMM.2004.1264978.</p>
+<blockquote>
+  <p>WMS provides the ability to download maps from WMS servers, thus, allowing different datasets from different WMS
+    servers as well as local data to easily be combined into single map visualization. WMS uses client-server
+    architecture as shown in Figure 1.</p>
+</blockquote>
+<p align="center"><img src="https://i.imgur.com/sGRPi4s.png" alt="wms-archtecture"></p>
+<h2 id="project-requirements">Project Requirements</h2>
+<p>The original requirement document can be found in this <a
+    href="https://github.com/cassiofb-dev/weather-visualization-tool/tree/master/docs/assets/PCS2022.1-Projeto1-wvtool_compressed.pdf">link</a>.
+</p>
+<h3 id="functional-requirements">Functional Requirements</h3>
+<ol>
+  <li>As a background resource, the app must allow users to configurate the local data repository.<ol>
+      <li>The data must not be alterated in comparison to its font.</li>
+    </ol>
+  </li>
+  <li>The app must consume the weather data in local repository.</li>
+  <li>The user can choose the weather variable.</li>
+  <li>The app main view must have 3 layers:<ol>
+      <li>Layer 1: Rio de Janeiro map.</li>
+      <li>Layer 2: Weather geospatial data in timelapse animation.</li>
+      <li>Layer 3: 7x7 Grid over Rio de Janeiro area.</li>
+    </ol>
+  </li>
+  <li>The app must allow user controls like: zoom in, zoom out and translation.</li>
+  <li>The app main view must be a timelapse wather geospatial data animation. It must show the evolution of the choosed
+    weather variable:<ol>
+      <li>The animation must show data grouped by a time interval of 15 minutes.</li>
+      <li>The animation must be controlled by a control bar.</li>
+      <li>The control bar must allow users to define the inital and final datetime.</li>
+      <li>The control bar must allow users to pause visualization.</li>
+      <li>The control bar must allow users to skip to the previos or next period.</li>
+    </ol>
+  </li>
+  <li>The app must have, as auxiliary views, plot of the geospatial data provided by weather stations:<ol>
+      <li>Each plot must be linked to a dropdown that allows users to choose one of the 49 grid cells.</li>
+      <li>The plot must show the data linked to weather station observations in the selected grid area.</li>
+      <li>Each plot must show the precipitation data as a line plot in which the x axis contains the time dimension and
+        y axis contains the observation value.</li>
+      <li>The plot must evolve as an animation that is linked to the main view time and the current time in the main
+        view must be the central time in the auxiliary view.</li>
+      <li>In each animated interation, the auxiliary view plot must show the observations of the 12 previous and next
+        periods.</li>
+    </ol>
+  </li>
+  <li>The app must allow users to download the animation as a animated gif or a png image of the current interation.
+  </li>
+</ol>
+<h3 id="non-functional-requirements">Non-functional Requirements</h3>
+<ol>
+  <li>Beside the app source code, the items bellow must also be included as tasks:<ol>
+      <li><a href="/docs/#install">Installation and configuration documentation</a>.</li>
+      <li><a href="/docs/#architecture-diagram">Architecture diagram</a>.</li>
+      <li>Class diagram.</li>
+    </ol>
+  </li>
+  <li>The app development must be evolutive and versioned on github.</li>
+  <li>The github repository must be shared to show the app evolution.</li>
+  <li>The first task must be done as a read me markdown file on github.</li>
+  <li>The tasks 1.2, 1.3 and 1.4 must be in docs directiory.</li>
+</ol>
+<h2 id="credits">Credits</h2>
+<p>This app uses the following open source projects:</p>
+<ul>
+  <li><a href="https://github.com/git/git">Git</a></li>
+  <li><a href="https://nodejs.org/en/">Node.js</a></li>
+  <li><a href="https://github.com/angular/angular">Angular</a></li>
+  <li><a href="https://github.com/Leaflet/Leaflet">Leaflet</a></li>
+</ul>
+<h2 id="license">License</h2>
+<p>MIT</p>
+<hr>
+<blockquote>
+  <p>Vitória Santos <a href="https://github.com/viisantos">@viisantos</a> &nbsp;&middot;&nbsp;
+    Cásio Fernando <a href="https://github.com/cassiofb-dev">@cassiofb-dev</a> &nbsp;&middot;&nbsp;
+    Dennis <a href="https://twitter.com/dennissrn">@dennissrn</a></p>
+</blockquote>
