@@ -1,7 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { HomeService } from './home.service';
-import { HttpClient } from '@angular/common/http';
-//import * as L from 'leaflet';
 
 declare var L: any;
 @Component({
@@ -10,10 +8,8 @@ declare var L: any;
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements AfterViewInit {
-  //leafletMap?: L.Map;
   public map?: any;
   timeStamps: Array<any> = [];
-
 
   constructor(private mapService: HomeService) { }
 
@@ -21,10 +17,6 @@ export class HomeComponent implements AfterViewInit {
     this.initMap();
   }
 
-
-
-  // https://apps.socib.es/Leaflet.TimeDimension/examples/example13.html
-  // Just an example to configure leaflet with time dimension
   initMap() {
     this.timeStamps = this.mapService.makeTimeStamps(this.map);
     console.log(this.timeStamps);
@@ -61,24 +53,24 @@ export class HomeComponent implements AfterViewInit {
       const labels = [
         0 + '-' + 10,
         10 + '-' + 20,
-        20+'-'+50,
-        50+'-'+100,
-        100+"-"+200,
-        200+"-"+500,
-        500+"-"+1000,
-        1000+"+"
+        20 + '-' + 50,
+        50 + '-' + 100,
+        100 + "-" + 200,
+        200 + "-" + 500,
+        500 + "-" + 1000,
+        1000 + "+"
       ];
 
       const grades = [0, 10, 20, 50, 100, 200, 500, 1000];
       div.innerHTML = '<div><b>Legend</b></div>';
       for (let i = 0; i < grades.length; i++) {
-        div.innerHTML += '<i style="background:' + vm.mapService.getColor(grades[ i ]) + '"> &nbsp; &nbsp;</i> &nbsp; &nbsp;'
-        + labels[i] + '<br margin=0 />';
+        div.innerHTML += '<i style="background:' + vm.mapService.getColor(grades[i]) + '"> &nbsp; &nbsp;</i> &nbsp; &nbsp;'
+          + labels[i] + '<br margin=0 />';
       }
       return div;
     };
-    legend.addTo(this.map);
 
+    legend.addTo(this.map);
   }
 }
 
