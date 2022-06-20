@@ -1,3 +1,0 @@
-# Backend
-
-Backend directory
