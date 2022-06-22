@@ -41,3 +41,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+newrelic_agent.log
+package-lock.json
+settings.json
+energy.csv
+yarn.lock
+logo.png
