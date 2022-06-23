@@ -26,6 +26,7 @@ export class HomeService {
   dados: string = '/assets/data/dados_.json';
   i: any;
   timestamps: Array<any> = [];
+  markers_array: Array<any> = [];
   lightening_color: string = "green";
   constructor(private http: HttpClient) { }
 
@@ -59,17 +60,19 @@ export class HomeService {
     });
   }
 
-  makePluviometricStationsMarkers(map:any): void{
+  makePluviometricStationsMarkers(map:any): any{
     this.http.get(this.neighborhoods).subscribe((res: any) => {
       for (const c of res.features) {
         const lon = c.geometry.x;
         const lat = c.geometry.y;
         const marker = L.marker([lat, lon], defaultIcon);
+        this.markers_array.push(marker);
         //const circle = L.circleMarker([lat, lon], {radius:20},{color:'green'});
         marker.addTo(map);
         //circle.addTo(map);
       }
     });
+    return this.markers_array;
   }
 
   makelightning(map:any): void{
