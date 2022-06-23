@@ -103,7 +103,7 @@ export class HomeComponent implements AfterViewInit {
       instrument: 314,
       variable: 90047
     }];
-
+    
     const sapoHeightTimeLayer = L.timeDimension.layer.wms.timeseries(sapoHeightLayer, {
       updateTimeDimension: true,
       markers: markers,
@@ -177,14 +177,14 @@ export class HomeComponent implements AfterViewInit {
 
     var baseLayers = this.getCommonBaseLayers(leafletMap); // see baselayers.js
     L.control.layers(baseLayers, overlayMaps).addTo(leafletMap);
-
+    
     sapoHeightTimeLayer.addTo(leafletMap);
     sapoPeakDirectionTimeLayer.addTo(leafletMap);
     sapoMeanDirectionTimeLayer.addTo(leafletMap);
   }
 
   getCommonBaseLayers(map: any) {
-    const osmLayer = L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    const osmLayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' }, {
       attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
     });
     const bathymetryLayer = L.tileLayer.wms("https://ows.emodnet-bathymetry.eu/wms", {
