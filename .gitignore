@@ -1,5 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Data folders
+
+**/data
+
+# Python
+**/venv
+**/__pycache__
+
 # Compiled output
 **/dist
 **/tmp
