@@ -13,9 +13,9 @@ alerta_rio_controller = APIRouter(
 
 @alerta_rio_controller.get("/data/")
 def get_data(
-    start_time: str = None,
-    end_time: str = None,
-    seconds_interval: int = None,
+    start_time: str,
+    end_time: str,
+    seconds_interval: int,
     station: str = None,
 ):
     try:
