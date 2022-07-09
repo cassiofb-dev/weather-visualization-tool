@@ -25,7 +25,6 @@ class AlertaRioService:
         for interval_index in range(intervals_number):
             group_start_time = isoparse(current_time.isoformat())
             current_time += timedelta(seconds=seconds_interval)
-            
             current_time_group = {
                 "group_start_time": group_start_time.isoformat(),
                 "group_end_time": current_time.isoformat(),
