@@ -41,3 +41,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+package-lock.json
+settings.json
+energy.csv
+angular.json
+package.json
+yarn.lock
+server-metrics.json

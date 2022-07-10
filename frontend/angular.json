@@ -52,7 +52,8 @@
               "node_modules/leaflet-timedimension/dist/leaflet.timedimension.src.js",
               "src/assets/js/leaflet.timedimension.layer.wms.timeseries.js",
               "src/assets/js/leaflet.timedimension.circlelabelmarker.js",
-              "node_modules/highcharts/highstock.js"
+              "node_modules/highcharts/highstock.js",
+              "src/assets/plotly-latest.min.js"
             ]
           },
           "configurations": {
