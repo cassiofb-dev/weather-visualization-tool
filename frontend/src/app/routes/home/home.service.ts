@@ -1,6 +1,5 @@
 import { Injectable  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RadioControlValueAccessor } from '@angular/forms';
 //import * as T from 'leaflet';
 
 declare var L:any;
@@ -30,7 +29,7 @@ export class HomeService {
   lightening_color: string = "green";
   constructor(private http: HttpClient) { }
 
-  getColor(d:Number) {
+  getColor(d:Number):String {
 		if(d > 1000){ return '#800026';}
 		else if(d > 500){return '#BD0026';}
 		else if(d > 200){return '#E31A1C';}

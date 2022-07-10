@@ -1,2 +1,10 @@
-<div id="map" style="height: 80vh;">
+<div id="map" style="height: 60vh; width: 90vh; margin-left:90%; float:right">
+</div>
+
+<div>
+  <canvasjs-chart [options]="chartOptions" [styles]="{width: '40%', height:'30vh'}" (chartInstance)="getChartInstance($event)"></canvasjs-chart>
+</div>
+
+<div>
+  <canvasjs-chart [options]="chartOptions" [styles]="{width: '40%', height:'30vh'}" (chartInstance)="getChartInstance($event)"></canvasjs-chart>
 </div>
