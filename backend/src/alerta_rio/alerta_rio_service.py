@@ -56,7 +56,7 @@ class AlertaRioService:
 
     def alerta_rio_txt_to_dict_list(self, txt_path: str):
         observations_df = pd.read_csv(
-            filepath_or_buffer="src/alerta_rio/data/santa_cruz_202205_Met.txt",
+            filepath_or_buffer=txt_path,
             skiprows=[0, 1, 2, 3, 5],
             delimiter=r"\s+",
         )
@@ -70,17 +70,34 @@ class AlertaRioService:
         )
 
         observations_df.drop(columns=["Dia", "Hora"], inplace=True)
-        observations_df.rename(
-            inplace=True,
-            columns={
-                "Chuva": "precipitation",
-                "DirVento": "wind_direction",
-                "VelVento": "wind_velocity",
-                "Temperatura": "temperature",
-                "Pressao": "pressure",
-                "Umidade": "moisture",
-            }
-        )
+
+        observations_df.replace(["ND"], None, inplace=True)
+
+        if observations_df["Umidade"].isna().sum() < 0:
+            observations_df.rename(
+                inplace=True,
+                columns={
+                    "Chuva": "precipitation",
+                    "DirVento": "wind_direction",
+                    "VelVento": "wind_velocity",
+                    "Temperatura": "temperature",
+                    "Pressao": "pressure",
+                    "Umidade": "moisture",
+                }
+            )
+        else:
+            observations_df.drop(columns=["Umidade"], inplace=True)
+            observations_df.rename(
+                inplace=True,
+                columns={
+                    "HBV": "precipitation",
+                    "Chuva": "wind_direction",
+                    "DirVento": "wind_velocity",
+                    "VelVento": "temperature",
+                    "Temperatura": "pressure",
+                    "Pressao": "moisture",
+                }
+            )
 
         observations_iso_datetimes = observations_dates + "T" + observations_times
 
