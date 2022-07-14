@@ -2,3 +2,20 @@
   font-family: 'Changa One', cursive;
   margin-bottom: 0;
 }
+
+html, .container {
+  min-height: 100%;
+}
+.container {
+  padding: 0;
+  margin: 0;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+}

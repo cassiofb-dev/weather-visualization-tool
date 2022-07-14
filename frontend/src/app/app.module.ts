@@ -10,6 +10,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeService } from './routes/home/home.service';
 
+import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
+var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,11 +20,12 @@ import { HomeService } from './routes/home/home.service';
     AboutComponent,
     HeaderComponent,
     FooterComponent,
+    CanvasJSChart
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers:[
     HomeService

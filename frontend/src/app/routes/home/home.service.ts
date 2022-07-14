@@ -1,6 +1,5 @@
 import { Injectable  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RadioControlValueAccessor } from '@angular/forms';
 //import * as T from 'leaflet';
 
 declare var L:any;
@@ -26,10 +25,11 @@ export class HomeService {
   dados: string = '/assets/data/dados_.json';
   i: any;
   timestamps: Array<any> = [];
+  markers_array: Array<any> = [];
   lightening_color: string = "green";
   constructor(private http: HttpClient) { }
 
-  getColor(d:Number) {
+  getColor(d:Number):String {
 		if(d > 1000){ return '#800026';}
 		else if(d > 500){return '#BD0026';}
 		else if(d > 200){return '#E31A1C';}
@@ -59,17 +59,19 @@ export class HomeService {
     });
   }
 
-  makePluviometricStationsMarkers(map:any): void{
+  makePluviometricStationsMarkers(map:any): any{
     this.http.get(this.neighborhoods).subscribe((res: any) => {
       for (const c of res.features) {
         const lon = c.geometry.x;
         const lat = c.geometry.y;
         const marker = L.marker([lat, lon], defaultIcon);
+        this.markers_array.push(marker);
         //const circle = L.circleMarker([lat, lon], {radius:20},{color:'green'});
         marker.addTo(map);
         //circle.addTo(map);
       }
     });
+    return this.markers_array;
   }
 
   makelightning(map:any): void{
