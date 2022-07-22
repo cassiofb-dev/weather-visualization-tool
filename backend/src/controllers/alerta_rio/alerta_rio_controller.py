@@ -1,17 +1,11 @@
 from fastapi import APIRouter
-
-from src.alerta_rio.alerta_rio_service import AlertaRioService
+from controllers.alerta_rio.alerta_rio_service import AlertaRioService
 
 alerta_rio_service = AlertaRioService()
 
-alerta_rio_controller = APIRouter(
-    prefix="/alerta-rio",
-    tags=["alerta-rio"],
-    responses={404: {"description": "Not found"}},
-)
+router = APIRouter()
 
-
-@alerta_rio_controller.get("/data/")
+@router.get("/data")
 def get_data(
     start_time: str,
     end_time: str,
