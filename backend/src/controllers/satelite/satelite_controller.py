@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from controllers.satelite.satelite_service import SateliteService
+from src.controllers.satelite.satelite_service import SateliteService
 
 satelite = SateliteService()
 router = APIRouter()

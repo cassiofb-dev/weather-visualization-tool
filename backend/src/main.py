@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from controllers.routes import router
-from utils.core.orjson import ORJSONResponse
+from src.routes.routes import router
+from src.utils.core.orjson import ORJSONResponse
 
 app = FastAPI(default_response_class=ORJSONResponse)
 

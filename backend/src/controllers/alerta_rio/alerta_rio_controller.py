@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from controllers.alerta_rio.alerta_rio_service import AlertaRioService
+from src.controllers.alerta_rio.alerta_rio_service import AlertaRioService
 
 alerta_rio_service = AlertaRioService()
 

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from controllers.alerta_rio import alerta_rio_controller as alerta_rio
-from controllers.satelite import satelite_controller as satelite
+from src.controllers.alerta_rio import alerta_rio_controller as alerta_rio
+from src.controllers.satelite import satelite_controller as satelite
 
 router = APIRouter()
 
