@@ -2,7 +2,6 @@ import orjson
 import typing
 from fastapi.responses import JSONResponse
 
-
 class ORJSONResponse(JSONResponse):
     media_type = "application/json"
 

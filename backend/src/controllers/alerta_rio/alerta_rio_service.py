@@ -4,7 +4,6 @@ from dateutil.parser import isoparse
 
 import pandas as pd
 
-
 class AlertaRioService:
     def get_data(self, start_time, end_time, seconds_interval, station):
         DATA_DIR = "src/alerta_rio/data"
