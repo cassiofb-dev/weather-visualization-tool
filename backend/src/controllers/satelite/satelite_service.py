@@ -16,15 +16,15 @@ class SateliteService:
         hour = date_time.hour
 
         # Adding 0 for the pattern '001', '002'...
-        if month < 10:
-            month = f"00{month}"
-        else:
-            month = f"0{month}"
+        if day < 10:
+            day = f"00{day}"
+        elif day >= 10 and day <= 99:
+            day = f"0{day}"
         
         if hour < 10:
             hour = f"0{hour}"
 
-        file_path = f"{DATA_DIR}/{year}/{month}/{hour}"
+        file_path = f"{DATA_DIR}/{year}/{day}/{hour}"
         response_list = []
         for file in os.listdir(file_path):
             ds = xr.open_dataset(f"{file_path}/{file}")
@@ -41,25 +41,6 @@ class SateliteService:
         return response_dict
 
     def filter_coordinates(self, ds:xr.Dataset):
-       
-        # ds = ds['event_energy'].where(
-        #     ds['event_lat'] >= -24.0,
-        #     drop=True)
-
-        # ds = ds.where(
-        #     ds['event_lat'] <= -22.5,
-        #     drop=True)
-
-        # ds = ds.where(
-        #     ds['event_lon'] >= -43.8,
-        #     drop=True)
-
-        # ds = ds.where(
-        #     ds['event_lon'] <= -43.0,
-        #     drop=True)
-        
-        # return ds
-
         return ds['event_energy'].where(
             (ds['event_lat'] >= -24.0) & (ds['event_lat'] <= -22.5) & 
             (ds['event_lon'] >= -43.8) & (ds['event_lon'] <= -43.0))
